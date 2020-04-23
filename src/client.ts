@@ -112,6 +112,7 @@ export class SubscriptionClient {
     } = (options || {});
 
     this.wsImpl = webSocketImpl || NativeWebSocket;
+    console.log('wsImpl', this.wsImpl);
     if (!this.wsImpl) {
       throw new Error('Unable to find native implementation, or alternative implementation for WebSocket!');
     }
@@ -542,7 +543,10 @@ export class SubscriptionClient {
   }
 
   private connect() {
-    this.client = new this.wsImpl(this.url, this.wsProtocols);
+
+    console.log('CONNECT wsProtocols ConnectionParams.__zone_symbol__value', this.wsProtocols,  this.connectionParams().__zone_symbol__value);
+
+    this.client = new this.wsImpl(this.url, this.wsProtocols, this.connectionParams().__zone_symbol__value);
 
     this.checkMaxConnectTimeout();
 
