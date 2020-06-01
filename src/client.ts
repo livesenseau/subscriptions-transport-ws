@@ -557,10 +557,10 @@ export class SubscriptionClient {
 
           // Send CONNECTION_INIT message, no need to wait for connection to success (reduce roundtrips)
           this.sendMessage(undefined, MessageTypes.GQL_CONNECTION_INIT, connectionParams);
-          this.flushUnsentMessagesQueue();
+          // this.flushUnsentMessagesQueue();
         } catch (error) {
           this.sendMessage(undefined, MessageTypes.GQL_CONNECTION_ERROR, error);
-          this.flushUnsentMessagesQueue();
+          // this.flushUnsentMessagesQueue();
         }
       }
     };
@@ -591,6 +591,16 @@ export class SubscriptionClient {
       opId = parsedMessage.id;
     } catch (e) {
       throw new Error(`Message must be JSON-parseable. Got: ${receivedData}`);
+    }
+
+
+    if (
+        [ MessageTypes.GQL_CONNECTION_ACK,
+        ].indexOf(parsedMessage.type) !== -1 && !this.operations[opId]
+    ) {
+        this.flushUnsentMessagesQueue();
+
+        return;
     }
 
     if (
