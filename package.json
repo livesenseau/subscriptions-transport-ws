@@ -1,5 +1,5 @@
 {
-  "name": "subscriptions-transport-ws",
+  "name": "@mluis/subscriptions-transport-ws",
   "version": "0.9.16",
   "description": "A websocket transport for GraphQL subscriptions",
   "main": "dist/index.js",
@@ -59,5 +59,13 @@
   "typescript": {
     "definition": "dist/index.d.ts"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apollostack/subscriptions-transport-ws/issues"
+  },
+  "homepage": "https://github.com/apollostack/subscriptions-transport-ws#readme",
+  "directories": {
+    "doc": "docs"
+  },
+  "author": ""
 }
